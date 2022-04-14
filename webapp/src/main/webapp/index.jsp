@@ -2,7 +2,7 @@
   <div class="container">
   <style>
    body {
-     background-color: coral;
+     background-color: lightblue;
    }
   </style>
     <h1>New user Register for DevOps Learning</h1>
