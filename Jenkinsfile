@@ -6,11 +6,6 @@ pipeline{
     
     stages{
         stage('Clone'){
-            when {
-                expression {
-                    !skipRemainingStages
-                }
-            }
             steps{
                 git url: 'https://github.com/mishra-priyanshu/hello-world.git', branch: 'master'
             }
