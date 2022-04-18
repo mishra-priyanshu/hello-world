@@ -27,15 +27,15 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
-                tag=$(cat /proc/sys/kernel/random/uuid)
-                echo $tag
-                echo $(hostname)
+                #tag=$(cat /proc/sys/kernel/random/uuid)
+                #echo $tag
+                #echo $(hostname)
                 cd /opt/docker-project 
                 #docker  rm -f $(docker ps -a -q) ;
                 docker system prune  --force;
                 docker image prune --force;
-                docker build -t regapp:$tag . ;
-                exit 0
+                docker build -t regapp:tag . ;
+                exit 0;
                 << EOF
                 '''
             }
@@ -45,7 +45,7 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
-                docker run -d  --name  registerapp-$tag  -p  8082:8080  regapp:$tag ;
+                docker run -d  --name  registerapp-tag  -p  8082:8080  regapp:$tag ;
                 exit 0
                 << EOF
                 '''
