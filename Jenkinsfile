@@ -29,7 +29,7 @@ pipeline{
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
                 tag=$(cat /proc/sys/kernel/random/uuid)
                 cd /opt/docker-project 
-                docker  rm -f $(docker ps -a -q) ;
+                #docker  rm -f $(docker ps -a -q) ;
                 docker system prune  --force;
                 docker image prune --force;
                 docker build -t regapp:$tag . ;
