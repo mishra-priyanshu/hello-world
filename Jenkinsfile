@@ -31,7 +31,7 @@ pipeline{
                 #echo $tag
                 #echo $(hostname)
                 cd /opt/docker-project 
-                docker ps -aq | xargs docker stop | xargs docker rm;
+                dockr ps -aq | xargs docker stop | xargs docker rm;
                 docker system prune  --force;
                 docker image prune --force;
                 docker build -t regapp:tag . ;
@@ -41,6 +41,11 @@ pipeline{
             }
         }
         stage("Application Hosting"){
+            when {
+                expression {
+                    !skipRemainingStages
+                }
+            }
             steps{
                 sh '''
                 #!/bin/bash
