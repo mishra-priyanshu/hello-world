@@ -11,33 +11,18 @@ pipeline{
             }
         }
         stage('Build'){
-            when {
-                expression {
-                    !skipRemainingStages
-                }
-            }
             steps{
                 
                 sh 'mvn clean package'
             }
         }
         stage("Copy to Docker Host"){
-            when {
-                expression {
-                    !skipRemainingStages
-                }
-            }
             steps{
                 sh 'sshpass -p dockeradmin scp  -o StrictHostKeyChecking=no  Dockerfile dockeradmin@172.31.3.204:/opt/docker-project'
                 sh 'sshpass -p dockeradmin scp  -o StrictHostKeyChecking=no  webapp/target/*.war dockeradmin@172.31.3.204:/opt/docker-project'
             }
         }
         stage("Build Docker Image"){
-            when {
-                expression {
-                    !skipRemainingStages
-                }
-            }
             steps{
                 sh '''
                 #!/bin/bash
@@ -56,11 +41,6 @@ pipeline{
             }
         }
         stage("Application Hosting"){
-            when {
-                expression {
-                    !skipRemainingStages
-                }
-            }
             steps{
                 sh '''
                 #!/bin/bash
@@ -72,11 +52,6 @@ pipeline{
             }
         }
         stage("Application Status"){
-            when {
-                expression {
-                    !skipRemainingStages
-                }
-            }
             steps{
                 sh 'echo Application Successfully hosted'
             }
