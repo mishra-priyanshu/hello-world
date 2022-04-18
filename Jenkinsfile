@@ -31,7 +31,7 @@ pipeline{
                 #echo $tag
                 #echo $(hostname)
                 cd /opt/docker-project 
-                #docker  rm -f $(docker ps -a -q) ;
+                docker  rm -f $(docker ps -a -q);
                 docker system prune  --force;
                 docker image prune --force;
                 docker build -t regapp:tag . ;
