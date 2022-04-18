@@ -28,6 +28,8 @@ pipeline{
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
                 tag=$(cat /proc/sys/kernel/random/uuid)
+                echo $tag
+                echo $(hostname)
                 cd /opt/docker-project 
                 #docker  rm -f $(docker ps -a -q) ;
                 docker system prune  --force;
