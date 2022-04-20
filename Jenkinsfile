@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('Clone'){
             steps{
-                git url: 'https://github.com/mishra-priyanshu/hello-world.git', branch: 'master'
+                git url: 'https://github.com/mishra-priyanshu/helo-world.git', branch: 'master'
             }
         }
         stage('Build'){
