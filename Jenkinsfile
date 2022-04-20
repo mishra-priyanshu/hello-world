@@ -35,7 +35,6 @@ pipeline{
                 docker system prune  --force;
                 docker image prune --force;
                 dockrr build -t regapp:${BUILD_NUMBER} . ;
-                exit 0;
                 << EOF
                 '''
             }
@@ -46,7 +45,6 @@ pipeline{
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
                 docker run -d  --name=registerapp-${BUILD_NUMBER}  -p  8082:8080  regapp:${BUILD_NUMBER} ;
-                exit 0;
                 << EOF
                 '''
             }
