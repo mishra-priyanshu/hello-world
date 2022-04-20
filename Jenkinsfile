@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('Clone'){
             steps{
-                git url: 'https://github.com/mishra-priyanshu/helo-world.git', branch: 'master'
+                git url: 'https://github.com/mishra-priyanshu/hello-world.git', branch: 'master'
             }
         }
         stage('Build'){
@@ -34,7 +34,7 @@ pipeline{
                 docker ps -aq | xargs docker stop | xargs docker rm;
                 docker system prune  --force;
                 docker image prune --force;
-                docker build -t regapp:${BUILD_NUMBER} . ;
+                dockrr build -t regapp:${BUILD_NUMBER} . ;
                 exit 0;
                 << EOF
                 '''
