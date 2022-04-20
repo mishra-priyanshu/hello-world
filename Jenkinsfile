@@ -26,7 +26,7 @@ pipeline{
             steps{
                 sh '''
                 #!/bin/bash
-                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
+                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204;
                 #tag=$(cat /proc/sys/kernel/random/uuid)
                 #echo $tag
                 #echo $(hostname)
@@ -35,7 +35,6 @@ pipeline{
                 docker system prune  --force;
                 docker image prune --force;
                 dockrr build -t regapp:${BUILD_NUMBER} . ;
-                << EOF
                 '''
             }
         }
