@@ -34,7 +34,7 @@ pipeline{
                 docker ps -aq | xargs docker stop | xargs docker rm;
                 docker system prune  --force;
                 docker image prune --force;
-                docker build -t regapp:tag . ;
+                docker build -t regapp:${BUILD_NUMBER} . ;
                 exit 0;
                 << EOF
                 '''
@@ -45,7 +45,7 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
-                docker run -d  --name=registerapp-tag  -p  8082:8080  regapp:tag ;
+                docker run -d  --name=registerapp-${BUILD_NUMBER}  -p  8082:8080  regapp:${BUILD_NUMBER} ;
                 exit 0;
                 << EOF
                 '''
