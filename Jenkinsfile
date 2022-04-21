@@ -27,13 +27,7 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204;
-                #tag=$(cat /proc/sys/kernel/random/uuid)
-                #echo $tag
-                #echo $(hostname)
                 cd /opt/docker-project 
-                docker ps -aq | xargs docker stop | xargs docker rm;
-                docker system prune  --force;
-                docker image prune --force;
                 dockrr build -t regapp:${BUILD_NUMBER} . ;
                 '''
             }
@@ -42,9 +36,9 @@ pipeline{
             steps{
                 sh '''
                 #!/bin/bash
-                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
+                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204;
+                docker kill $(docker ps -q);
                 docker run -d  --name=registerapp-${BUILD_NUMBER}  -p  8082:8080  regapp:${BUILD_NUMBER} ;
-                << EOF
                 '''
             }
         }
