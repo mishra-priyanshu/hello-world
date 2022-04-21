@@ -37,7 +37,7 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
-                docker stop $(docker ps -f name=register);
+                docker stop $(docker ps -f name=register -q);
                 docker image ls;
                 docker run -d  --name=registerapp-${BUILD_NUMBER}  -p  8082:8080  regapp:${BUILD_NUMBER} ;
                 '''
