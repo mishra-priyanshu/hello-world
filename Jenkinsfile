@@ -21,8 +21,7 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.94.194 << EOF
-                cd /opt/docker;
-                ansible-playbook registerapp.yaml;
+                ansible-playbook  /opt/docker/registerapp.yaml;
                 sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.3.204;
                 docker image ls;
                 '''
@@ -33,7 +32,7 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.94.194 << EOF
-                ansible-playbook deploy_registerapp.yaml;
+                ansible-playbook  /opt/docker/deploy_registerapp.yaml;
                 sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.3.204;
                 docker ps ;
                 '''
