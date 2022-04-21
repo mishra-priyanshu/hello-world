@@ -38,6 +38,7 @@ pipeline{
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
                 docker kill $(docker ps -q);
+                docker iamge ls;
                 docker run -d  --name=registerapp-${BUILD_NUMBER}  -p  8082:8080  regapp:${BUILD_NUMBER} ;
                 '''
             }
