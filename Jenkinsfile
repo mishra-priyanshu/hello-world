@@ -26,9 +26,11 @@ pipeline{
             steps{
                 sh '''
                 #!/bin/bash
-                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
-                cd /opt/docker-project;
-                docker build -t regapp:${BUILD_NUMBER} . ;
+                sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.94.194 << EOF
+                cd /opt/docker;
+                ansible-playbook registerapp.yaml;
+                sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.3.204;
+                docker image ls;
                 '''
             }
         }
@@ -36,10 +38,9 @@ pipeline{
             steps{
                 sh '''
                 #!/bin/bash
-                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
-                docker ps -f name=register -q | xargs docker stop
-                docker image ls;
-                docker run -d  --name=registerapp-${BUILD_NUMBER}  -p  8082:8080  regapp:${BUILD_NUMBER} ;
+                sshpass -p ansadminadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.94.194 << EOF
+                ansible-playbook deploy_registerapp.yaml;
+                sshpass -p ansadminadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.3.204;
                 docker ps ;
                 '''
             }
