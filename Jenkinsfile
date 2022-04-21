@@ -28,7 +28,7 @@ pipeline{
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204;
                 cd /opt/docker-project;
-                dockrr build -t regapp:${BUILD_NUMBER} . ;
+                docker build -t regapp:${BUILD_NUMBER} . ;
                 '''
             }
         }
