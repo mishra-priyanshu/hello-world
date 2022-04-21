@@ -21,6 +21,7 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.94.194 << EOF
+                hostname;
                 ansible-playbook  /opt/docker/registerapp.yaml;
                 sshpass -p ansadmin ssh  -o StrictHostKeyChecking=no  ansadmin@172.31.3.204;
                 docker image ls;
