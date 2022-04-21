@@ -26,7 +26,7 @@ pipeline{
             steps{
                 sh '''
                 #!/bin/bash
-                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204;
+                sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
                 cd /opt/docker-project;
                 docker build -t regapp:${BUILD_NUMBER} . ;
                 '''
