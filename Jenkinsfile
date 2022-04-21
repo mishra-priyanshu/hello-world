@@ -37,10 +37,10 @@ pipeline{
                 sh '''
                 #!/bin/bash
                 sshpass -p dockeradmin ssh  -o StrictHostKeyChecking=no  dockeradmin@172.31.3.204 << EOF
-                export con=`docker ps -f name=register -q`
-                docker stop $con;
+                docker ps -f name=register -q | xargs docker stop
                 docker image ls;
                 docker run -d  --name=registerapp-${BUILD_NUMBER}  -p  8082:8080  regapp:${BUILD_NUMBER} ;
+                docker ps ;
                 '''
             }
         }
